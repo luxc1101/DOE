@@ -130,7 +130,6 @@
 \usepackage{float}
 \graphicspath{./Bilder/}
 
-
 \usepackage[colorlinks,linkcolor=blue]{hyperref}
 \pagenumbering{Roman}
 
@@ -629,8 +628,241 @@ In dieser Arbeit wurde der Energieverteilung des Signals in jeder Schicht berech
 \newpage
 \section{Performances of regression model and artificial neural network in monitoring welding quality based on power signal\cite{Zhao.2020}}
 In dieser Studie wurde eine Untersuchung durchgeführt, um die Leistung des Regressionsmodells und des künstlichen neuronalen Netzwerks bei der Vorhersage des Linsendurchmesser von RSW durch Überwachung der dynamischen Leistungssignatur zu vergleichen.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 1]{./Bilder/Welding powers signals for various welding qualities.png}
+\caption{Welding powers signals for various welding qualities}\label{fgg:P}
+\end{figure}
+Ein Echtzeit-Erfassungssystem vorgestellt, nach dem der Schweißstrom und die Schweißspannung im Sekundärkreis erhalten wurden. Das Leistungssignal wurde erfasst und analysiert, um die Schweißqualitäten zu charakterisieren. Die Schweißqualitäten können als schlechte , gute Spritzer-Schweißnähte klassifiziert werden. Die Feature mit physikalischen Bedeutungen wurden aus dem Leistungssignal extrahiert, um die Variationen im Signal zu identifizieren, und sie wurden dann als Eingaben des künstlichen neuronalen Netzwerks und des Regressionsmodells benutzt. Die Vorhersagegenauigkeit der Modelle wurde ebenfalls diskutiert.\\
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 1]{./Bilder/Measurement system used in the welding process.png}
+\caption{Measurement system used in the welding process}\label{fgg:P}
+\end{figure}
+\noindent
+\textbf{Schweißmaschine: }Hochfrequenz-AC-Schweißgerät\\
+\\
+\textbf{Material: }0,4 mm Titanlegierung TC2\\
+\\
+\textbf{Elektrode: }luftgekühlte Elektrodenelektroden mit flacher Spitze mit Spitzendurchmesser 3 mm.\\
+\\
+\textbf{Faktor: }\\
 
-Ein Echtzeit-Erfassungssystem vorgestellt, nach dem der Schweißstrom und die Schweißspannung im Sekundärkreis erhalten wurden. Das Leistungssignal wurde erfasst und analysiert, um die Schweißqualitäten zu charakterisieren. Die Schweißqualitäten können als schlechte , gute Spritzer-Schweißnähte klassifiziert werden. Die Feature mit physikalischen Bedeutungen wurden aus dem Leistungssignal extrahiert, um die Variationen im Signal zu identifizieren, und sie wurden dann als Eingaben des künstlichen neuronalen Netzwerks und des Regressionsmodells benutzt. Die Vorhersagegenauigkeit der Modelle wurde ebenfalls diskutiert.
+\begin{table}[H]
+\caption{Faktor Tab. 5}
+\begin{flushleft}
+	\begin{tabular}{lccc} 
+		\toprule
+ 		\textbf{Faktor} & \textbf{Untergrenze} & \textbf{Obergrenze}&\textbf{Intervall}\\
+		\midrule
+		Schweißstrom(kA) & 1,0 & 2,4 & 0.2\\
+
+		Elektrodenkraft(N) & 76,2 & 203,2 & 25,4\\
+
+		Schweißzeit(ms) & 4  & 12 & 2\\
+		\bottomrule
+	\end{tabular}
+\end{flushleft}
+\end{table}
+\noindent
+\textbf{Qualitätsparameter: }Zugscherfeatigkeit, Linsendurchmesser.
+Qualität der Schweißverbindungen ist abhängig von der Linsengrößen, der Zugscherfeatigkeit und dem Versagensmodus ist. Die Versagensmodus umfassen Grenzflächenfehler (IF) und Auszugsfehler (PF). Es gibt einen kritischen Linsendurchmesser, der die IF- und PF-Modus verursacht. Daher scheint der Linsendurchmesser der Schlüssel für die Bestimmung der Schweißqualität zu sein.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.7]{./Bilder/Three types of welding joints with different failure.png}
+\caption{Three types of welding joints with different failure: (a) Schlecht mit IF (b) Spritzer mit IF (c) Gut mit PF}\label{fgg:F}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.7]{./Bilder/Typical mechanical properties of three types of welding joints.png}
+\caption{Typical mechanical properties of three types of welding joints}\label{fgg:T}
+\end{figure}
+\noindent
+\textbf{Regressionsmodelle: }\\
+Feature Auswahl: Stepwise Regression Methode. Die Regressionskoeffizienten wurden unter Verwendung der 170 Samples von Versuchsdaten geschätzt. Die restlichen 80 Samples wurden zur Validierung dieses Regressionsmodells verwendet.\\
+\\
+\textbf{ANN: }
+\begin{itemize}
+\item Input:
+\begin{itemize}
+	\item $P_{m}$ Beta-Spitzenleistungswert
+	\item $P_{n}$ Leistungswert am Wendepunkt
+	\item $\Delta P$ Leistungsschwankung zwischen Wendepunkt und Beta-Spitzenpunkt
+	\item $P_{s}$, $P_{s} = P_{m}/\Delta P$ Leistungsabfallrate zwischen Wendepunkt und Beta-Spitzenpunkt
+	\item $Q$, $Q = {\int P(t)\,dt}$ Numerischer Integrationswert des Leistungssignals während des Schweißvorgangs
+\end{itemize}
+\item Hidden Layer:
+\begin{itemize}
+	\item 7
+\end{itemize}
+\item Output:
+\begin{itemize}
+	\item Linsendurchmesser
+\end{itemize}
+\end{itemize}
+
+Die Ergebnisse beweisen, dass ein künstliches neuronales Netzwerk im Vergleich zu dem quadratischen Regressionsmodell, das die schrittweise Regressionsanalyse umfasst, genauere Ergebnisse der Vorhersage des Linsendurchmessers und des Ziels viel besser liefern kann. Darüber hinaus liefert die Methode der quadratischen Polynom-Schritt-Regression möglicherweise keine genauen Werte bestimmter Punkte für einige stark nichtlineare Gleichungen.
+\newpage
+
+\section{Optimization of resistance spot welding process using taguchi method and a neural network\cite{Lin.}}
+In dieser Studie wurde eine Anwendung vorgestellt, bei der die Taguchi-Methode und ein neuronales Netzwerk kombiniert wurden, um die optimalen Bedingungen für die Verbesserung der RSW-Qualität von hochfestem Stahlblech zu bestimmen.\\
+\\
+\textbf{Schweißmaschine: }FANUC a8/4000is\\
+\\
+\textbf{Material: }0,7 mm hoch festes Stahlblech\\
+\\
+\textbf{Faktor: }\\
+\begin{table}[H]
+\caption{Faktor Tab. 6}
+\begin{flushleft}
+	\begin{tabular}{lcccc} 
+		\toprule
+ 		\textbf{Faktor} & \textbf{Level 1 } & \textbf{Level 2}&\textbf{Level 3}&\textbf{Level 4}\\
+		\midrule
+		Die Durchmesser der Elektrodenspitze(mm) & $\Phi$3 & $\Phi$4 & $\Phi$5 & $\Phi$6\\
+
+		Schweißstrom(A) & 6200  & 7800 & 9400 & 11000\\
+
+		Schweißzeit(Zyklen) & 8 & 14 & 20 & 26\\
+		\bottomrule
+	\end{tabular}
+\end{flushleft}
+\end{table}
+\noindent
+\textbf{Rauschfaktor: }\\
+Die Proben der Stufe 1 (N1) können ohne Reinigungsbehandlung mit Schmutz und / oder Fett angelaufen sein. Die Oberflächenverunreinigungen wurden entfernt auf Stufe 2 (N2) gereinigt.\\
+\\
+\textbf{Qualitätsparameter: }Zugscherfestigkeit\\
+\\
+\textbf{OA-Experiment: }$L16(4^{5})$\\
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 1]{./Bilder/SNR graph for the tensile shear strength.png}
+\caption{SNR graph for the tensile shear strength}\label{fgg:T}
+\end{figure}
+\noindent
+\textbf{ANN: }\\
+Insgesamt 64 Simple wurden in einen Trainingsdaten(38), einen Testsdaten(13) und einen Validierungsdaten(13) unterteilt.
+\begin{itemize}
+\item Input:
+\begin{itemize}
+	\item Die Durchmesser der Elektrodenspitze(mm)
+	\item Schweißstrom 
+	\item Elektroden Kraft
+	\item Schweißzeit
+	\item Sauberkeit der Probe
+\end{itemize}
+\item Hidden Layer:
+\begin{itemize}
+	\item 7
+\end{itemize}
+\item Output:
+\begin{itemize}
+	\item Zugscherfestigkeit
+\end{itemize}
+\end{itemize}
+
+
+\begin{figure}[H]
+  \centering%
+  \ffigbox[\FBwidth]{%
+    \begin{subfloatrow}[2]
+      \ffigbox[\FBwidth]{%
+        \fbox{\includegraphics[height=3cm]{./Bilder/Results of simulating different electrode force}}}{\caption{Results of simulating different electrode force}}
+      \ffigbox[\FBwidth]{%
+        \fbox{\includegraphics[height=3cm]{./Bilder/Results of simulating different size of the electrode tip}}}{\caption{Results of simulating different size of the electrode tip}}
+    \end{subfloatrow}
+
+    \begin{subfloatrow}[2]
+      \ffigbox[\FBwidth]{%
+        \fbox{\includegraphics[height=3cm]{./Bilder/Results of simulating different welding current}}}{\caption{Results of simulating different welding current}}
+      \ffigbox[\FBwidth]{%
+        \fbox{\includegraphics[height=3cm]{./Bilder/Results of simulating different welding time}}}{\caption{Results of simulating different welding time}}
+    \end{subfloatrow}
+    }
+	{%
+    \caption{The best welding parameters selected by ANN}\label{fig:label}%
+  }
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 1]{./Bilder/Surface conditions of specimens for validating the proposed approach.png}
+\caption{Surface conditions of specimens for validating the proposed approach}\label{fgg:T}
+\end{figure}
+\newpage
+
+\section{Quality evaluation by classification of electrode force patterns in the resistance spot welding process using neural networks\cite{Park.2004}}
+In einem servogesteuerten RSW-System wird ein Qualitätsbewertungsverfahren durch Klassifizierung von Elektrodenkraft unter Verwendung neuronales Netzwerk benutzt.\\
+\\
+\textbf{Schweißmaschine: }servo-controlled RSW\\
+\\
+\textbf{Material: }0,8 mm dünne Stähle \\
+\\
+\textbf{Faktor: }\\
+\begin{table}[H]
+\caption{Faktor Tab. 7}
+\begin{flushleft}
+	\begin{tabular}{lccc} 
+		\toprule
+ 		\textbf{Faktor} & \textbf{Untergrenze} & \textbf{Obergrenze}&\textbf{Intervall}\\
+		\midrule
+		Schweißstrom(kA) & 6 & 10 & 1\\
+
+		Elektrodenkraft(N) & 1500 & 2100 & 200\\
+
+		Schweißzeit(Zyklen) & \multicolumn{3}{c}{10} \\
+		\bottomrule
+	\end{tabular}
+\end{flushleft}
+\end{table}
+\noindent
+\textbf{Qualitätsparameter: }Zugscherfestigkeit, Elektrodeneindrucktiefe $e_{u}$. Gute Schweißqualität mit starker Schweißfestigkeit und kleiner Elektrodeneindrucktiefe $e_{u}$\\
+\\
+\textbf{Schweißqualitäten nach Elektroden-Kraft-Muster: }Schweißstrom I = 8 kA, Schweißzeit 10 Zyklen. Die Elektrodenkräfte bei 1500 und 1700 N fallen aufgrund des Ausstoßes innerer geschmolzener Materialien durch die große Wärmemenge. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.7]{./Bilder/Electrode force patterns for various welding forces.png}
+\caption{Electrode force patterns for various welding forces}\label{fgg:T}
+\end{figure}
+Schweißstrom steigt von 6 zu 10 kA mit einer bleibenden Elektrode Kraft 2100 N. Im Fall von Schweißströmen von 9 und 10 kA zeigen die Kraftmuster schlechte Formen, da die Kräfte während des Schweißens plötzlich abfallen, weil das geschmolzene Material durch eine große Wärmemenge aus den hohen Schweißströmen ausgestoßen wird.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.7]{./Bilder/Electrode force patterns for various welding currents.png}
+\caption{Electrode force patterns for various welding currents}\label{fgg:T}
+\end{figure}
+\noindent
+\textbf{ANN: }\\ 
+Die Experiment mit der Schweißströme von 6 bis 10 kA mit einer festen Schweißzeit von 10 Zyklen und einer Schweißkraft von 2100 N.
+
+Durch die Versuchsreihe unter den Schweißbedingungen werden 78 Sätze von Elektrodenkraftmustern für 0,8 mm Stahl gesammelt.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.7]{./Bilder/Welding qualities of the standard welding quality classes.png}
+\caption{Welding qualities of the standard welding quality classes}\label{fgg:T}
+\end{figure}
+
+\begin{figure}[H]
+  \centering%
+  \ffigbox[\FBwidth]{%
+    \begin{subfloatrow}[2]
+      \ffigbox[\FBwidth]{%
+        \fbox{\includegraphics[height=5cm]{./Bilder/Five types of standard electrode force pattern}}}{\caption{Five types of standard electrode force pattern}}
+      \ffigbox[\FBwidth]{%
+        \fbox{\includegraphics[height=5cm]{./Bilder/The standard force slope patterns}}}{\caption{The standard force slope patterns}}
+    \end{subfloatrow}
+    }
+	{%
+    \caption{Select slope feature from force pattern and used in ANN input }\label{fig:label}%
+  }
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.8]{./Bilder/Block diagram of the training and estimation procedures for electrode force slope patterns using the proposed BP neural network.png}
+\caption{Block diagram of the training and estimation procedures for electrode force slope patterns using the proposed BP neural network}\label{fgg:T}
+\end{figure}
 
 
 \newpage
