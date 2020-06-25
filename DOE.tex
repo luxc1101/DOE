@@ -144,7 +144,7 @@
 \institute{Institut für Fertigungstechnik}
 \chair{Professur für Fügetechnik und Montage}
 \title{%
-  Experiment Design
+  Experiment Design aus Literatur
 }
 %\thesis{master}
 %\graduation[M.Sc.]{Master of Science}
@@ -866,6 +866,76 @@ Durch die Versuchsreihe unter den Schweißbedingungen werden 78 Sätze von Elekt
 
 
 \newpage
+
+\section{Weld quality monitoring research in small scale resistance spot welding by dynamic resistance and neural network\cite{Wan.2017}}
+\textbf{Schweißmaschine: }Kleines Widerstandspunktschweißgerät(Miyahci Unitek Corporation)Strom kann Konstant bleiben \\
+\\
+\textbf{Material: }0,4 mm Titanlegierung TC2\\
+\\
+\textbf{Elektrode: }3 mm Spitzendurchmesser der nicht wassergekühlten Elektroden\\
+\\
+\textbf{Faktor: }\\
+\begin{table}[H]
+\caption{Faktor Tab. 8}
+\begin{flushleft}
+	\begin{tabular}{lcc} 
+		\toprule
+ 		\textbf{Faktor} & \textbf{Untergrenze} & \textbf{Obergrenze}\\
+		\midrule
+		Schweißstrom(kA) & 1,2 & 2,4\\
+
+		Elektrodenkraft(N) & 75 & 200\\
+
+		Schweißzeit(ms) & 6  & 12 \\
+		\bottomrule
+	\end{tabular}
+\end{flushleft}
+\end{table}
+insgesamt 60 Simples\\
+\\
+\textbf{Qualitätsparameter: }Linsendurchmesser messen nach statischer Zugschertest, Ausfall Last\\
+\\
+\textbf{Regressionsmodelle: }
+Feature Auswahl: F value und P value (threshold in < 0,05, threhold out > 0,1) 50 Simple wurde für Koeffizient des Models benutzt, die restlichen 10 Simple wurde für Validierung verwendet.\\ 
+\\
+\textbf{ANN: }\\
+50 Simple zur Training, 10 Simple zur Validierung
+\begin{itemize}
+\item Input:
+\begin{itemize}
+	\item $F$ Elektroden Kraft
+	\item $I$ Schweißstrom  
+	\item $T_{4}$ gesamte Schweißzeit
+	\item $\Delta T_{2}$ Schweißzeit zwischen erstem Widerstandstal und zweiter Widerstandsspitze
+	\item $T_{3}$ Schweißzeit bei zweiter Widerstandsspitze
+	\item $R_{2}$ erstes Widerstandstal
+	\item $R_{3}$ zweite Widerstandsspitze
+	\item $R_{4}$ Widerstand beim Ende des Schweißen
+\end{itemize}
+\item Hidden Layer:
+\begin{itemize}
+	\item 20
+\end{itemize}
+\item Output:
+\begin{itemize}
+	\item Linsendurchmesser
+	\item Ausfall Last
+\end{itemize}
+\end{itemize}
+Es ist nicht erforderlich, detaillierte Werte für die Ausfall Last und die Linsendurchmesser zu kennen. Nur die Informationen zum Schweißqualitätsniveau reichen aus, um zu verteilen, ob die Punktschweißung zufrieden ist oder nicht.\\
+Schweißqualitätsniveau basierend auf Ausfall Last:
+\begin{itemize}
+	\item $F_{l}<2kN$ : schlechtes Schweißen
+	\item $2kN<F_{l}<3kN$ : gutes Schweißen
+	\item $F_{l}>3kN$ : Spritzer
+\end{itemize}
+Eine Regressionsanalyse könnte für eine vorläufige Qualitätsschätzung verwendet werden.\\
+ANN könnte übernommen werden, um die Genauigkeit der Qualitätsschätzung weiter zu verbessern.
+\newpage
+
+
+
+
 \printbibliography[heading=bibintoc]\label{sec:bibliography}%
 
 
